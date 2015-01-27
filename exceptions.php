@@ -30,3 +30,20 @@ function fetchHttpBody($url)
 			throw new Exception('Got and unexpected status code of ' . $statusGroup);
 	}
 }
+
+
+try {
+	echo fetchHttpBody('http://example.org');
+
+} 	catch(HttpRedirectException $e){
+		printf('Redirect Error: %s (code %d)', $e->getMessage(), $e->getCode());
+	}
+	catch(HttpClientException $e){
+		printf('Client Error: %s (code %d)', $e->getMessage(), $e->getCode());
+	} 
+	catch(HttpServerException $e){
+		printf('Server Error: %s (code %d)', $e->getMessage(), $e->getCode());
+	} 
+	catch(Exception $e){
+		printf('General Error: %s (code %d)', $e->getMessage());
+	} 
